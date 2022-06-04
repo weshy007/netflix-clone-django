@@ -27,14 +27,15 @@
         <a href="{% url 'login' %}">
             <img class="nav__logo img-fluid" src="{% static 'images/netflix_logo.png' %}" alt=""/>
         </a>
+        <!-- SEarch bar -->
         <div class="d-flex align-items-center">
             <form action="{% url 'search' %}" method="post">
                 {% csrf_token %}
                 <div class="input-group mb-3">
                     <div class="input-group">
                         <input type="text" name="term" class="form-control bg-transparent text-light"
-                               placeholder="jurassic world">
-                        <button class="btn search bg-danger" id="button-addon2" type="submit"><i
+                               placeholder="Search...">
+                        <button class="btn search" id="button-addon2" type="submit"><i
                                 class="fas fa-search text-light"></i>
                         </button>
                     </div>
@@ -42,8 +43,8 @@
             </form>
         
             <div class="profile ms-4">
-                <a href="{% url '' %}" class="text-decoration-none">
-                    <img src="https://ih0.redbubble.net/image.618427277.3222/flat,1000x1000,075,f.u2.jpg" id="profile" class="img-fluid">
+                <a href="{% url 'profile' %}" class="text-decoration-none">
+                    <img src="https://ih0.redbubble.net/image.618427277.3222/flat,1000x1000,075,f.u2.jpg" style="border-radius: 15px;" id="profile" class="img-fluid">
                 </a>
             </div>
         </div>
