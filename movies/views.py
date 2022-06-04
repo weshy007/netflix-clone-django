@@ -1,12 +1,12 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 
+from .api_requests import searchMovie
 from .forms import CreateUserForm, LoginUserForm
 
 # Create your views here.
 def register(request):
-
     if request.user.is_authenticated:
         return redirect('home')
     else:
@@ -26,7 +26,6 @@ def register(request):
 
 
 def login(request):
-
     if request.user.is_authenticated:
         return redirect('home')
     else:
@@ -46,6 +45,18 @@ def login(request):
 
 def home(request):
     return render(request, 'index.html')
+
+def search(request):
+    if request.method == 'POST':
+        search_term = request.POST.get('search_term')
+
+        response = searchMovie(search_term)
+        res = response['results']
+
+        if len(res) > 0:
+            return render(request, 'search.html', {'res': res})
+    
+    return render(request, 'search.html')
 
 def profile(request):
     return render(request, 'profile.html')
