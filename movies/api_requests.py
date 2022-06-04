@@ -28,6 +28,6 @@ def get_video(movie_id):
     return response.json()
 
 # GETTING THE MOVIE BY SEARCH FUNCTIONALITY
-def searchMovie(query):
+def multi_search(query):
     response = requests.get(f'https://api.themoviedb.org/3/search/multi?query={query}&api_key={API_KEY}&language=en-US&page=1&include_adult=true')
     return response.json()
