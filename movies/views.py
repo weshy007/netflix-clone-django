@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 
-from .api_requests import multi_search
+from .api_requests import multi_search, get_video
 from .forms import CreateUserForm, LoginUserForm
 
 # Create your views here.
@@ -46,8 +46,12 @@ def login(request):
 def home(request):
     return render(request, 'index.html')
 
-def play(request):
-    return render(request, 'play.html')
+def play(request, movie_id):
+    data = get_video(movie_id)
+    video_info = data['results'][0]
+    youtube_url = f"www.youtube.com/watch?v={video_info['key']}"
+
+    return render(request, 'play.html', {'url': youtube_url})
 
 def search(request):
     if request.method == 'POST':
